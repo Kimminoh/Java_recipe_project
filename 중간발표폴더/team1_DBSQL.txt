@@ -1,0 +1,71 @@
+[팀원 적용 DB SQL문]
+
+적용시 , DBConnection함수에 localhost와 해당 SQL계정을 생성 후 , 적용한다(보여주기 위해서)
+
+가입할 아이디 
+
+[마스터 계정 로그인]
+connect
+sys as sysdba
+비밀번호는 1 아니면 물어보기 ...
+
+[DB계정 만들기]
+create user team1 identified by team1;
+grant connect,resource to team1; //연결확인
+
+
+[sql에 복붙할 코드]
+
+create table 임시레시피테이블
+(레시피코드 NUMBER(3),
+레시피이름 VARCHAR2(40),
+재료 VARCHAR2(2000),
+이미지경로 VARCHAR2(2000),
+레시피설명 VARCHAR2(2000),
+primary key(레시피코드));
+
+
+create table 회원
+(NO NUMBER NOT NULL,
+ID VARCHAR2(20) NOT NULL,
+PW VARCHAR(20) NOT NULL,
+POINT NUMBER,
+ING VARCHAR2(2000)
+primary key(NO));
+
+
+create table 레시피_냉장고
+(레시피명 char(20) not null, 
+레시피코드 char(10),
+primary key(레시피명));
+
+create table 재료
+(레시피코드 char(10),
+순서 char(10),
+재료 char(10) not null,
+양 char(10),
+재료코드 char(5));
+
+insert into 레시피_냉장고
+values ('감자조림', '001');
+insert into 레시피_냉장고
+values ('감자계란국', '002');
+insert into 레시피_냉장고
+values ('감자채볶음','003');
+
+insert into 재료
+values ('001', '1', '감자', '2개', 'i001');
+insert into 재료
+values ('001', '1', '양파', '1/2개', 'i002');
+insert into 재료
+values ('002', '1', '감자', '2개', 'i001');
+insert into 재료
+values ('002', '2', '양파', '1개', 'i002');
+insert into 재료
+values ('002', '3', '계란', '2개', 'i003');
+insert into 재료
+values ('003', '1', '감자', '2개', 'i001');
+insert into 재료
+values ('003', '2', '양파', '1/2개', 'i002');
+insert into 재료
+values ('003', '3', '당근', '1/2개', 'i004');
